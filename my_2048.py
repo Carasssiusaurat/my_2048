@@ -2,6 +2,7 @@
 
 from src.my_init_game import init_game
 import sys
+from src.infos import cases_nb
 
 def help() -> int:
     print("""\
@@ -13,14 +14,17 @@ def help() -> int:
         """)
     return 0
 
+
 def main() -> int:
+    cases_nb.x = 4
+    cases_nb.y = 4
     if len(sys.argv) < 2:
         return init_game()
     if sys.argv[1] == "-h":
         return help()
     else:
         return init_game()
-    return 0
+
 
 if __name__ == "__main__":
     sys.exit(main())
