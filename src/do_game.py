@@ -11,24 +11,27 @@ from src.infos import cases_nb
 
 class moves:
 
+    detect_moves = 0
+
     def get_moves(self) -> int:
         key = pygame.key.get_pressed()
 
+        self.detect_moves = 0
         if key[K_UP]:
             self.mv_up()
-            time.sleep(0.1)
+            time.sleep(0.2)
             return 1
         if key[K_RIGHT]:
             self.mv_right()
-            time.sleep(0.1)
+            time.sleep(0.2)
             return 1
         if key[K_DOWN]:
             self.mv_down()
-            time.sleep(0.1)
+            time.sleep(0.2)
             return 1
         if key[K_LEFT]:
             self.mv_left()
-            time.sleep(0.1)
+            time.sleep(0.2)
             return 1
         return 0
 
@@ -46,9 +49,11 @@ class moves:
                     if Background.cases[o_y][x].num != 0 and Background.cases[o_y][x].num == Background.cases[y][x].num:
                         Background.cases[y][x].num += Background.cases[o_y][x].num
                         Background.cases[o_y][x].num = 0
+                        self.detect_moves = 1
                 if y + 1 != my_len and Background.cases[y][x].num == Background.cases[y + 1][x].num:
                     Background.cases[y][x].num += Background.cases[y + 1][x].num
                     Background.cases[y + 1][x].num = 0
+                    self.detect_moves = 1
                 y += 1
             x += 1
             y = 0
@@ -66,6 +71,7 @@ class moves:
                     if Background.cases[o_y][x].num != 0:
                         Background.cases[y][x].num = Background.cases[o_y][x].num
                         Background.cases[o_y][x].num = 0
+                        self.detect_moves = 1
                 y += 1
             x += 1
             y = 0
@@ -84,9 +90,11 @@ class moves:
                     if Background.cases[o_y][x].num != 0 and Background.cases[o_y][x].num == Background.cases[y][x].num:
                         Background.cases[y][x].num += Background.cases[o_y][x].num
                         Background.cases[o_y][x].num = 0
+                        self.detect_moves = 1
                 if Background.cases[y][x].num == Background.cases[y - 1][x].num:
                     Background.cases[y][x].num += Background.cases[y - 1][x].num
                     Background.cases[y - 1][x].num = 0
+                    self.detect_moves = 1
                 y -= 1
             x -= 1
             y = cases_nb.y - 1
@@ -104,6 +112,7 @@ class moves:
                     if Background.cases[o_y][x].num != 0:
                         Background.cases[y][x].num = Background.cases[o_y][x].num
                         Background.cases[o_y][x].num = 0
+                        self.detect_moves = 1
                 y -= 1
             x -= 1
             y = cases_nb.y - 1
@@ -121,9 +130,11 @@ class moves:
                     if Background.cases[y][x].num == Background.cases[y][o_x].num:
                         Background.cases[y][x].num += Background.cases[y][o_x].num
                         Background.cases[y][o_x].num = 0
+                        self.detect_moves = 1
                 if x + 1 < cases_nb.x and Background.cases[y][x].num == Background.cases[y][x + 1].num:
                     Background.cases[y][x].num += Background.cases[y][x + 1].num
                     Background.cases[y][x + 1].num = 0
+                    self.detect_moves = 1
                 x += 1
             y += 1
             x = 0
@@ -141,6 +152,7 @@ class moves:
                     if Background.cases[y][o_x].num != 0:
                         Background.cases[y][x].num = Background.cases[y][o_x].num
                         Background.cases[y][o_x].num = 0
+                        self.detect_moves = 1
                 x += 1
             y += 1
             x = 0
@@ -159,9 +171,11 @@ class moves:
                     if Background.cases[y][x].num == Background.cases[y][o_x].num:
                         Background.cases[y][x].num += Background.cases[y][o_x].num
                         Background.cases[y][o_x].num = 0
+                        self.detect_moves = 1
                 if Background.cases[y][x].num == Background.cases[y][x - 1].num:
                     Background.cases[y][x].num += Background.cases[y][x - 1].num
                     Background.cases[y][x - 1].num = 0
+                    self.detect_moves = 1
                 x -= 1
             y += 1
             x = cases_nb.x - 1
@@ -179,6 +193,7 @@ class moves:
                     if Background.cases[y][o_x].num != 0:
                         Background.cases[y][x].num = Background.cases[y][o_x].num
                         Background.cases[y][o_x].num = 0
+                        self.detect_moves = 1
                 x -= 1
             y -= 1
             x = cases_nb.x - 1

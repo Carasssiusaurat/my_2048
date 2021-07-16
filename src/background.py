@@ -52,8 +52,8 @@ class Background:
         case = []
         stock = 0
 
-        case.append(randrange(4))
-        case.append(randrange(4))
+        case.append(randrange(cases_nb.x))
+        case.append(randrange(cases_nb.y))
         stock = randrange(2)
         if stock == 1:
             case.append(2)
@@ -92,8 +92,8 @@ class Background:
 
 def init_new_num() -> list:
     case = []
-    case.append(randrange(4))
-    case.append(randrange(4))
+    case.append(randrange(cases_nb.x))
+    case.append(randrange(cases_nb.y))
     if randrange(2) == 1:
         case.append(2)
     else:
