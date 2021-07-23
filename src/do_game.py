@@ -4,7 +4,6 @@ import sys
 import pygame
 import time
 from pygame.constants import K_DOWN, K_LEFT, K_RIGHT, K_UP
-from pygame.sprite import OrderedUpdates
 from src.background import Background
 from src.infos import cases_nb
 
@@ -18,18 +17,22 @@ class moves:
 
         self.detect_moves = 0
         if key[K_UP]:
+            print("mv_up")
             self.mv_up()
             time.sleep(0.2)
             return 1
         if key[K_RIGHT]:
+            print("mv_right")
             self.mv_right()
             time.sleep(0.2)
             return 1
         if key[K_DOWN]:
+            print("mv_down")
             self.mv_down()
             time.sleep(0.2)
             return 1
         if key[K_LEFT]:
+            print("mv_left")
             self.mv_left()
             time.sleep(0.2)
             return 1
@@ -38,7 +41,6 @@ class moves:
     def mv_up(self) -> None:
         x, y, o_y, my_len = 0, 0, 0, 0
 
-        print("mv_up")
         while x < cases_nb.x:
             while y < cases_nb.y:
                 my_len = len(Background.cases[y])
@@ -79,7 +81,6 @@ class moves:
     def mv_down(self) -> None:
         x, y, o_y, my_len = cases_nb.x - 1, cases_nb.y - 1, 0, 0
 
-        print("mv_down")
         while x >= 0:
             while y > 0:
                 my_len = len(Background.cases[y])
@@ -120,7 +121,6 @@ class moves:
     def mv_left(self) -> None:
         x, y, o_x = 0, 0, 0
 
-        print("mv_left")
         while y < cases_nb.y:
             while x < cases_nb.x - 1:
                 if x < cases_nb.x - 1 and Background.cases[y][x + 1].num == 0:
@@ -160,7 +160,6 @@ class moves:
     def mv_right(self) -> None:
         x, y, o_x, my_len = cases_nb.x - 1, 0, 0, 0
 
-        print("mv_right")
         while y <= cases_nb.x - 1:
             while x > 0:
                 my_len = len(Background.cases[y])

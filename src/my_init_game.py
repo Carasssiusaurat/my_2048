@@ -6,6 +6,8 @@ from pygame.constants import K_ESCAPE
 from src.do_game import moves
 from src.background import Background, def_new_num
 from src.infos import cases_nb
+from src.detect_lose import detect_lose
+
 
 def print_map(cases):
     for x in cases:
@@ -21,12 +23,13 @@ def calcul_window_size() -> list:
         size[0] += 97
         nb += 1
     nb = 0
-    while nb != cases_nb.y:    
+    while nb != cases_nb.y:
         size[1] += 97
         nb += 1
     size[0] += 10
     size[1] += 10
     return size
+
 
 def init_game() -> int:
     pygame.init()
@@ -47,15 +50,18 @@ def init_game() -> int:
         surface.fill((0, 0, 0))
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
+                Background.cases.clear()
                 return 0
         keys = pygame.key.get_pressed()
         if keys[K_ESCAPE]:
+            Background.cases.clear()
             return 0
         if my_moves.get_moves() != 0:
+            if detect_lose():
+                sys.exit()
             if my_moves.detect_moves != 0:
                 def_new_num()
             print_map(Background.cases)
             background.draw(surface)
             pygame.display.update()
-
     return 0

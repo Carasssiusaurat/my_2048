@@ -8,12 +8,12 @@ from src.infos import cases_nb
 class Case:
     cnt_cases = 0
 
-    def __init__(self, my_pos_x: int, my_pos_y: int, my_size: int, my_color: tuple) -> None:
+    def __init__(self, my_pos_x: int, my_pos_y: int, my_size: int, my_color: tuple, my_num: int) -> None:
         self.pos_x = my_pos_x  # int
         self.pos_y = my_pos_y  # int
         self.size = my_size  # int
         self.color = my_color  # tuple, int
-        self.num = 0
+        self.num = my_num
 
         Case.cnt_cases += 1
 
@@ -42,7 +42,7 @@ class Background:
         while x < cases_nb.x:
             if pos_x > widht:
                 break
-            stock = Case(pos_x, pos_y, 87, [255, 0, 0])
+            stock = Case(pos_x, pos_y, 87, [255, 0, 0], 0)
             case.append(stock)
             pos_x += 97
             x += 1
@@ -77,7 +77,6 @@ class Background:
         pos = 30
         my_font = pygame.font.SysFont(None, 30)
 
-        print("oui")
         for y in self.cases:
             for x in y:
                 if x.num != 0:
